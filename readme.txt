@@ -1,1 +1,1 @@
-testing for github
+learning about computational sound and coding sounds
