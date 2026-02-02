@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listener with Slider</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juan HW1</title>
+
+    <style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: background-image 500ms ease-in-out, filter 120ms ease;
+    }
+
+    #waveform-controls {
+        padding: 16px;
+        display: inline-block;
+        border-radius: 12px;
+        margin: 16px;
+    }
+
+    .wave-btn.active {
+        background: #1cac09;
+        color: white;
+        border-color: #222;
+    }
+
+    
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image: var(--bg-url);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: scale(1);
+        filter: none;
+        transition: transform 120ms ease, filter 120ms ease;
+    }
+
+    
+    body.bg-pulse::before {
+        transform: scale(4);
+        filter: blur(1px) brightness(1.5);
+    }
+
+
+
+    </style>
 </head>
+
 <body>
-    <button>Play</button>
-    <input type="range" min="100" max="1000" value="440" class="slider" id="pitch">
-    <p></p>
-    <script src="main.js"></script>
+  <div id="waveform-controls">
+    <button type="button" class="wave-btn" data-wave="sine">sine</button>
+    <button type="button" class="wave-btn active" data-wave="sawtooth">sawtooth</button>
+    <button type="button" class="wave-btn" data-wave="square">square</button>
+    <button type="button" class="wave-btn" data-wave="triangle">triangle</button>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
