@@ -151,10 +151,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         //as soon as we click key set the gain to small num so no click
         const currTime= audioCtx.currentTime;
-        gainNode.gain.setValueAtTime(0.0001, currTime);
+       
+        //attack time 
+        const attack = 0.1; 
+        // decay time
+        const decay = 0.2;  
+        //sustain level
+        const sustain = 0.5;
         
-        //slowly ramp up to the full gain
-        gainNode.gain.exponentialRampToValueAtTime(1.0, currTime+ 0.05);
+        //begin at near 0 because cant start at 0 for exponential
+        gainNode.gain.cancelScheduledValues(currTime);
+        gainNode.gain.setValueAtTime(0.0001, currTime);
+        //doing the rael attack here
+        gainNode.gain.exponentialRampToValueAtTime(1.0, currTime + attack); 
+        //going from decay to the sustain val
+        gainNode.gain.exponentialRampToValueAtTime(sustain, currTime + attack + decay);
         
         //connect notegain to globalgain, which alr pointing to the destination
         osc.connect(gainNode);
